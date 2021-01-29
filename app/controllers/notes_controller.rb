@@ -3,18 +3,18 @@ class NotesController < ApplicationController
 
     def index
         notes = Note.all
-        render json: notes, except: [:created_at, :updated_at]
+        render json: notes
     end
 
     def show
         note = Note.find_by_id(params[:id])
-        render json: note, except: [:created_at, :updated_at]
+        render json: note
     end
 
     def create
         note = Note.new(notes_params)
         if note.save 
-            render json: note, except: [:created_at, :updated_at]
+            render json: note
         else 
             render json: {error: note.errors.full_messages}
         end
@@ -23,7 +23,7 @@ class NotesController < ApplicationController
     def update
         note = Note.find_by_id(params[:id])
         if note.update(notes_params)
-            render json: note, except: [:created_at, :updated_at]
+            render json: note
         else 
             render json: {error: note.errors.full_messages}
         end
@@ -32,7 +32,7 @@ class NotesController < ApplicationController
     def destroy
         note = Note.find_by_id(params[:id])
         if note.destroy
-            render json: note, except: [:created_at, :updated_at]
+            render json: note
         else
             render json: {error: "Something went wrong, cannot delete Note."}
         end
